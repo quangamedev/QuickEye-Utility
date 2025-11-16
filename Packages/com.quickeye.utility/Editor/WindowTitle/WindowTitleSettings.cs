@@ -1,4 +1,4 @@
-﻿#if UNITY_SETTINGS_MANAGER
+#if UNITY_SETTINGS_MANAGER
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.SettingsManagement;
@@ -72,15 +72,7 @@ namespace QuickEye.Utility.Editor.WindowTitle
 
         private static void UpdateWindowTitle()
         {
-            try
-            {
-                var type = typeof(EditorApplication);
-                var method = type.GetMethod("UpdateMainWindowTitle", BindingFlags.Static | BindingFlags.NonPublic);
-                method.Invoke(null, null);
-            }
-            catch
-            {
-            }
+            EditorApplication.UpdateMainWindowTitle();
         }
     }
 }
