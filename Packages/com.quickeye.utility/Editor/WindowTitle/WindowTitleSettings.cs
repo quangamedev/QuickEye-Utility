@@ -33,6 +33,16 @@ namespace QuickEye.Utility.Editor.WindowTitle
         public static string WindowTitle => TitleFormatter.Format(_FormatString.value);
         public static string RepositoryPath => _RepositoryPath.value;
 
+        [InitializeOnLoadMethod]
+        private static void Init()
+        {
+            EditorUserBuildSettings.activeBuildTargetChanged += UpdateWindowTitle;
+            EditorApplication.focusChanged += (hasFocus) =>
+            {
+                if (hasFocus) UpdateWindowTitle();
+            };
+        }
+
         [UserSettingBlock(" ")]
         private static void OnGUI(string searchContext)
         {
